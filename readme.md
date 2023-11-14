@@ -35,13 +35,15 @@ Thank you for being part of the PeoplePerTask journey! Together, let's redefine 
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" height="40" alt="bash logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="40" alt="vscode logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" height="40" alt="sql logo"  />
 </div>
 
 ## Contributing
 
 Contributions are always welcome!
 
-Check out [Officcial Respo](https://github.com/BilalChbanat/PeoplePerTask) for ways to get started.
+Check out the [Official Repo](https://github.com/BilalChbanat/PeoplePerTask) to get started.
 
 Please adhere to this project's `code syntax and rules`.
 
