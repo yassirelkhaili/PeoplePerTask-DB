@@ -32,7 +32,7 @@ CREATE TABLE `sys`.`sub_categories` (
   PRIMARY KEY (`sub_categoryID`),
   UNIQUE INDEX `sub_categoryID_UNIQUE` (`sub_categoryID` ASC) VISIBLE,
   UNIQUE INDEX `sub_categoryName_UNIQUE` (`sub_categoryName` ASC) VISIBLE,
-  UNIQUE INDEX `categoryID_UNIQUE` (`categoryID` ASC) VISIBLE,
+  INDEX `categoryID_INDEX` (`categoryID` ASC) VISIBLE,
   CONSTRAINT `categoryID`
     FOREIGN KEY (`categoryID`)
     REFERENCES `sys`.`categories` (`categoryID`)
@@ -50,8 +50,8 @@ CREATE TABLE `sys`.`projects` (
   `userID` INT NOT NULL,
   PRIMARY KEY (`projectID`),
   UNIQUE INDEX `projectID_UNIQUE` (`projectID` ASC) VISIBLE,
-  UNIQUE INDEX `categoryID_UNIQUE` (`categoryID` ASC) VISIBLE,
-  UNIQUE INDEX `sub_categoryID_UNIQUE` (`sub_categoryID` ASC) VISIBLE,
+  INDEX `categoryID_INDEX` (`categoryID` ASC) VISIBLE,
+  INDEX `sub_categoryID_INDEX` (`sub_categoryID` ASC) VISIBLE,
   UNIQUE INDEX `userID_UNIQUE` (`userID` ASC) VISIBLE,
     FOREIGN KEY (`categoryID`)
     REFERENCES `sys`.`categories` (`categoryID`)
@@ -140,7 +140,3 @@ ALTER TABLE `sys`.`testimonials`
 ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN deleted_at TIMESTAMP DEFAULT NULL,
 ADD COLUMN edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
-
-
-
-
