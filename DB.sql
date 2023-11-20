@@ -1,10 +1,10 @@
---Schema/DB:
+-- Schema/DB:
 
-CREATE SCHEMA `sys` ;
+CREATE SCHEMA `sys3` ;
 
---users table:
+-- users table:
 
-CREATE TABLE `sys`.`users` (
+CREATE TABLE `sys3`.`users` (
   `userID` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(50) NOT NULL,
   `passwordHash` VARCHAR(255) NOT NULL,
@@ -21,18 +21,18 @@ CREATE TABLE `sys`.`users` (
   UNIQUE INDEX `Userscol_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `phoneNumber_UNIQUE` (`phoneNumber` ASC) VISIBLE);
 
---category table:
+-- category table:
 
-CREATE TABLE `sys`.`categories` (
+CREATE TABLE `sys3`.`categories` (
   `categoryID` INT NOT NULL AUTO_INCREMENT,
   `categoryName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`categoryID`),
   UNIQUE INDEX `categorieID_UNIQUE` (`categoryID` ASC) VISIBLE,
   UNIQUE INDEX `categoryName_UNIQUE` (`categoryName` ASC) VISIBLE);
 
---sub_categories table:
+-- sub_categories table:
 
-CREATE TABLE `sys`.`sub_categories` (
+CREATE TABLE `sys3`.`sub_categories` (
   `sub_categoryID` INT NOT NULL AUTO_INCREMENT,
   `sub_categoryName` VARCHAR(45) NOT NULL,
   `categoryID` INT NOT NULL,
@@ -42,13 +42,13 @@ CREATE TABLE `sys`.`sub_categories` (
   INDEX `categoryID_INDEX` (`categoryID` ASC) VISIBLE,
   CONSTRAINT `categoryID`
     FOREIGN KEY (`categoryID`)
-    REFERENCES `sys`.`categories` (`categoryID`)
+    REFERENCES `sys3`.`categories` (`categoryID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
---projects table:
+-- projects table:
 
-CREATE TABLE `sys`.`projects` (
+CREATE TABLE `sys3`.`projects` (
   `projectID` INT NOT NULL AUTO_INCREMENT,
   `projectTitle` VARCHAR(50) NOT NULL,
   `projectDesc` VARCHAR(255) NOT NULL,
@@ -64,23 +64,23 @@ CREATE TABLE `sys`.`projects` (
   INDEX `sub_categoryID_INDEX` (`sub_categoryID` ASC) VISIBLE,
   UNIQUE INDEX `userID_UNIQUE` (`userID` ASC) VISIBLE,
     FOREIGN KEY (`categoryID`)
-    REFERENCES `sys`.`categories` (`categoryID`)
+    REFERENCES `sys3`.`categories` (`categoryID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `sub_categoryID`
     FOREIGN KEY (`sub_categoryID`)
-    REFERENCES `sys`.`sub_categories` (`sub_categoryID`)
+    REFERENCES `sys3`.`sub_categories` (`sub_categoryID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `userID`
     FOREIGN KEY (`userID`)
-    REFERENCES `sys`.`users` (`userID`)
+    REFERENCES `sys3`.`users` (`userID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
---freelance table:
+-- freelance table:
 
-CREATE TABLE `sys`.`freelance` (
+CREATE TABLE `sys3`.`freelance` (
   `freelanceID` INT NOT NULL AUTO_INCREMENT,
   `freelanceName` VARCHAR(45) NOT NULL,
   `skills` VARCHAR(45) NOT NULL,
@@ -94,13 +94,13 @@ CREATE TABLE `sys`.`freelance` (
   UNIQUE INDEX `userID_UNIQUE` (`userID` ASC) VISIBLE,
   CONSTRAINT `userIDfreelance`
     FOREIGN KEY (`userID`)
-    REFERENCES `sys`.`users` (`userID`)
+    REFERENCES `sys3`.`users` (`userID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
---offers table:
+-- offers table:
 
-CREATE TABLE `offers` (
+CREATE TABLE `sys3`.`offers` (
   `offersID` int NOT NULL AUTO_INCREMENT,
   `amount` varchar(45) NOT NULL,
   `delay` datetime NOT NULL,
@@ -117,9 +117,9 @@ CREATE TABLE `offers` (
   CONSTRAINT `projectID` FOREIGN KEY (`projectID`) REFERENCES `projects` (`projectID`)
 );
 
---testimonials table:
+-- testimonials table:
 
-CREATE TABLE `sys`.`testimonials` (
+CREATE TABLE `sys3`.`testimonials` (
   `tastimonialID` INT NOT NULL AUTO_INCREMENT,
   `comments` VARCHAR(255) NOT NULL,
   `userID` INT NOT NULL,
@@ -131,11 +131,11 @@ CREATE TABLE `sys`.`testimonials` (
   `edited_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT `userIDtestimonials`
     FOREIGN KEY (`userID`)
-    REFERENCES `sys`.`users` (`userID`)
+    REFERENCES `sys3`.`users` (`userID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-INSERT INTO users (username, passwordHash, email, phoneNumber, dob, city)
+INSERT INTO `sys3`.`users` (username, passwordHash, email, phoneNumber, dob, city)
 VALUES
     ('JohnDoe', 'hashed_password_1', 'john.doe@email.com', '1234567890', '1990-01-15', 'New York'),
     ('JaneSmith', 'hashed_password_2', 'jane.smith@email.com', '9876543210', '1985-05-20', 'Los Angeles'),
@@ -153,7 +153,7 @@ VALUES
     ('MichaelWright', 'hashed_password_14', 'michael.wright@email.com', '1357924680', '1986-09-20', 'Philadelphia'),
     ('AvaMartin', 'hashed_password_15', 'ava.martin@email.com', '6789012345', '1994-07-07', 'Minneapolis');
 
-    INSERT INTO testimonials (comments, userID)
+    INSERT INTO `sys3`.`testimonials` (comments, userID)
 VALUES
     ('Great user!', 1),
     ('Amazing person to work with!', 2),
@@ -171,7 +171,7 @@ VALUES
     ('Consistently delivers high-quality work.', 14),
     ('A pleasure to work with.', 15);
 
-    INSERT INTO freelance (freelanceName, skills, userID)
+    INSERT INTO `sys3`.`freelance` (freelanceName, skills, userID)
 VALUES
     ('Freelancer 4d', 'Mobile App Development', 4),
     ('Freelancer 5', 'Content Writing', 5),
@@ -186,7 +186,7 @@ VALUES
     ('Freelancer 14', 'E-commerce Development', 14),
     ('Freelancer 15', 'Project Management', 15);
 
-    INSERT INTO categories (categoryName)
+    INSERT INTO `sys3`.`categories` (categoryName)
 VALUES
     ('Category 1'),
     ('Category 2'),
@@ -204,7 +204,7 @@ VALUES
     ('Category 14'),
     ('Category 15');
 
-INSERT INTO sub_categories (sub_categoryName, categoryID)
+INSERT INTO `sys3`.`sub_categories` (sub_categoryName, categoryID)
 VALUES
     ('SubCategory 1', 1),
     ('SubCategory 2', 1),
@@ -227,7 +227,7 @@ VALUES
     ('SubCategory 19', 10),
     ('SubCategory 20', 10);
 
-INSERT INTO projects (projectTitle, projectDesc, categoryID, sub_categoryID, userID) 
+INSERT INTO `sys3`.`projects` (projectTitle, projectDesc, categoryID, sub_categoryID, userID) 
 VALUES
     ('Project 1', 'Description for Project 1', 1, 1, 1),
     ('Project 2', 'Description for Project 2', 2, 1, 2),
@@ -245,18 +245,15 @@ VALUES
     ('Project 14', 'Description for Project 14', 2, 2, 14),
     ('Project 15', 'Description for Project 15', 3, 1, 15);
 
-INSERT INTO offers (amount, delay, freelanceID, projectID)
+INSERT INTO `sys3`.`offers` (amount, delay, freelanceID, projectID)
 VALUES
     ('1000', '2023-12-01 12:00:00', 1, 2),
     ('1500', '2023-12-05 15:30:00', 2, 6),
     ('800', '2023-12-10 09:45:00', 3, 7),
-    ('1200', '2023-12-15 18:20:00', 14, 8),
-    ('2000', '2023-12-20 14:10:00', 15, 9),
-    ('900', '2023-12-25 10:00:00', 16, 10),
-    ('1800', '2023-12-30 16:45:00', 17, 11),
-    ('600', '2024-01-05 11:30:00', 18, 12),
-    ('1300', '2024-01-10 20:15:00', 19, 13),
-    ('1700', '2024-01-15 13:40:00', 20, 14);
-
-
-
+    ('1200', '2023-12-15 18:20:00', 4, 8),
+    ('2000', '2023-12-20 14:10:00', 5, 9),
+    ('900', '2023-12-25 10:00:00', 8, 10),
+    ('1800', '2023-12-30 16:45:00', 9, 11),
+    ('600', '2024-01-05 11:30:00', 10, 12),
+    ('1300', '2024-01-10 20:15:00', 11, 13),
+    ('1700', '2024-01-15 13:40:00', 12, 14);
