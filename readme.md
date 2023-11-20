@@ -47,3 +47,5 @@ Check out the [Official Repo](https://github.com/BilalChbanat/PeoplePerTask) to 
 
 Please adhere to this project's `code syntax and rules`.
 
+## Please ignore php folder in the debriefing
+
