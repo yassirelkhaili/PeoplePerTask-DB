@@ -102,7 +102,7 @@ CREATE TABLE `sys3`.`freelance` (
 
 CREATE TABLE `sys3`.`offers` (
   `offersID` int NOT NULL AUTO_INCREMENT,
-  `amount` varchar(45) NOT NULL,
+  `amount` float NOT NULL,
   `delay` datetime NOT NULL,
   `freelanceID` int NOT NULL,
   `projectID` int NOT NULL,
